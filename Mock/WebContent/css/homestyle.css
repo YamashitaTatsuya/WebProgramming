@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/*ログイン画面*/
+
+.hello{
+	text-align: center;
+}
+
+
+
+.login{
+	float:left;
+	margin-left:200px;
+}
+
+.botan1{
+	margin-top:10px;
+	margin-left:20px;
+}
+
+.passwordid{
+	clear: both;
+
+}
+
+.botan2{
+	margin-top:13px;
+	margin-left:20px;
+}
+
+.password{
+	float:left;
+	margin-left:200px;
+}
+
+.loginbotan{
+	margin-top:40px;
+	float:left;
+}
