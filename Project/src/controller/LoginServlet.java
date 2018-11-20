@@ -51,8 +51,8 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String loginId = request.getParameter("inputloginid");
-		String password = request.getParameter("inputpassword");
+		String loginId = request.getParameter("loginId");
+		String password = request.getParameter("password");
 
 		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 		UserDao userDao = new UserDao();

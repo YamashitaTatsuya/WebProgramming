@@ -12,17 +12,22 @@
 <body>
 	<h1 class="hello">ログイン画面</h1>
 
+	<c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+	</c:if>
 
 	<form class="form-signin" action="LoginServlet" method="post">
 
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<input type="text" name="inputloginid" class="botan1">
+	<input type="text" name="loginId" class="botan1">
 	</div>
 
 	<div class="passwordid">
 	<p class="password">パスワード</p>
-	<input type="text" name="inputpassword" class="botan2">
+	<input type="text" name="password" class="botan2">
 	</div>
 
 
