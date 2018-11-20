@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserDeleteServlet
+ * Servlet implementation class UserNewCreate
  */
-@WebServlet("/UserDeleteServlet")
-public class UserDeleteServlet extends HttpServlet {
+@WebServlet("/UserNewCreate")
+public class UserNewCreate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDeleteServlet() {
+    public UserNewCreate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +31,9 @@ public class UserDeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
+
 		/*自分で足したコード*/
-		// URLからGETパラメータとしてIDを受け取る
-		String id = request.getParameter("id");
-
-		// 確認用：idをコンソールに出力
-		System.out.println(id);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/sakujyo.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
 		dispatcher.forward(request, response);
 	}
 

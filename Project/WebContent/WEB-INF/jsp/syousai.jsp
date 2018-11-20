@@ -22,7 +22,7 @@
 
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<p class="id">id0001</p>
+	<p class="id">${User.id}</p>
 	</div>
 
 	<div class="username">

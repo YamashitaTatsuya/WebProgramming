@@ -116,5 +116,59 @@ public class UserDao {
         }
         return userList;
     }
+
+
+
+
+
+//自分で足したコード//
+/**
+ * ログインIDに紐づくユーザ情報を返す
+ * @param loginId
+ * @return
+ */
+public User findByInfo(String id) {
+    Connection conn = null;
+    try {
+        // データベースへ接続
+        conn = DBManager.getConnection();
+
+        // SELECT文を準備
+        String sql = "SELECT * FROM user WHERE id = ?";
+
+         // SELECTを実行し、結果表を取得
+        PreparedStatement pStmt = conn.prepareStatement(sql);
+        pStmt.setString(1, id);
+
+        ResultSet rs = pStmt.executeQuery();
+
+         // 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
+        if (!rs.next()) {
+            return null;
+        }
+
+        int id = rs.getInt("id");
+        String nameData = rs.getString("name");
+        Date birthDate = rs.getDate("birth_date");
+        String createDate = rs.getString("create_date");
+        String updateDate = rs.getString("update_date");
+        return new User(id, nameData,birthDate,createDate,updateDate);
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+    } finally {
+        // データベース切断
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+}
+
 }
 

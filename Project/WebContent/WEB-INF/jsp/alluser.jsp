@@ -41,45 +41,12 @@
 
 	<hr>
 
-	<table border="1" class="hyou">
-	<tr class="koumoku">
-	<th>ログインID</th>
-	<th>ユーザ名</th>
-	<th>生年月日</th>
-	<th>                    </th>
-	</tr>
-
-	<tr>
-	<td>id0001</td>
-	<td>田中太郎</td>
-	<td>1989年04月26日</td>
-	<td><a href="syousai.jsp" class="syou"> 詳細 </a><a href="kousin.jsp" class="kouu"> 更新 </a><a href="sakujyo.jsp" class="saku"> 削除 </a></td>
-	</tr>
-
-	<tr>
-	<td>id0002</td>
-	<td>佐藤二郎</td>
-	<td>2001年11月12日</td>
-	<td><a href="syousai.jsp" class="syou"> 詳細 </a><a href="kousin.jsp" class="kouu"> 更新 </a><a href="sakujyo.jsp" class="saku"> 削除 </a></td>
-	</tr>
-
-
-	<tr>
-	<td>id0003</td>
-	<td>佐川真司</td>
-	<td>2000年01月01日</td>
-	<td><a href="syousai.jsp" class="syou"> 詳細 </a><a href="kousin.jsp" class="kouu"> 更新 </a><a href="sakujyo.jsp" class="saku"> 削除 </a></td>
-	</tr>
-
-	</table>
-
-
 
 
 	        <div class="table-responsive">
-             <table class="table table-striped">
+             <table class="hyou" border="1">
                <thead>
-                 <tr>
+                 <tr class="koumoku">
                    <th>ログインID</th>
                    <th>ユーザ名</th>
                    <th>生年月日</th>
@@ -94,9 +61,9 @@
                      <td>${user.birthDate}</td>
                      <!-- TODO 未実装；ログインボタンの表示制御を行う -->
                      <td>
-                       <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
-                       <a class="btn btn-success" href="UserUpdateServlet?id=${user.id}">更新</a>
-                       <a class="btn btn-danger" href ="UserDeleteServlet?id=${user.id}">削除</a>
+                       <a class="syou" href="UserDetailServlet?id=${user.id}">詳細</a>
+                       <a class="kouu" href="UserUpdateServlet?id=${user.id}">更新</a>
+                       <a class="saku" href="UserDeleteServlet?id=${user.id}">削除</a>
                      </td>
                    </tr>
                  </c:forEach>
