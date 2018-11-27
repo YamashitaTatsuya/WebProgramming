@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/homestyle.css">
+<link rel="stylesheet" href="css/homes.css">
 <title>Insert title here</title>
 </head>
 <body>

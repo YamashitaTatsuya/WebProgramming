@@ -14,6 +14,7 @@ public class DBManager {
     final private static String USER = "root";
     final private static String PASS = "password";
 
+
     /**
      * DBへ接続するコネクションを返す
      */

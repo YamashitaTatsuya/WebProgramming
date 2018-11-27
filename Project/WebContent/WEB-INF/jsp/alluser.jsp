@@ -11,13 +11,15 @@
 <body>
 
 <div class="header">
-<p class="namename">ユーザー名さん</p>
+<p class="namename">${user.name}さん</p>
 <a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 
 <h1 class="hello">ユーザ一覧</h1>
 
-	<a href="shinki.jsp" class="sinki">新規登録</a>
+
+	<a href="UserNewCreateServlet">新規登録</a>
+
 
 	<div class="loginid">
 	<p class="login">ログインID</p>

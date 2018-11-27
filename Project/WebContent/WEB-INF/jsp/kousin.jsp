@@ -13,16 +13,22 @@
 
 <div class="header">
 <p class="namename">ユーザー名さん</p>
-<a href="#" class="logout">ログアウト</a>
+<a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 
 
 
 <h1 class="hello">ユーザー情報更新</h1>
 
+	<c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+	</c:if>
+
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<p class="id">id0001</p>
+	<p class="id">${kouuser.loginId}</p>
 	</div>
 
 	<div class="passwordid">
@@ -37,18 +43,19 @@
 
 	<div class="username">
 	<p class="user">ユーザー名</p>
-	<input type="text" name="名前" class="botan4" placeholder="田中太郎">
+	<input type="text" name="名前" class="botan4" placeholder="${kouuser.name}" >
 	</div>
 
 	<div class="seinengappi">
 	<p class="seinen">生年月日</p>
-	<input type="text" name="名前" class="botan5" placeholder="1989/04/26" >
+	<input type="text" name="名前" class="botan5" placeholder="${kouuser.birthDate}" >
 	</div>
 
-
+	<form class="form-signin" action="UserListServlet" method="post">
 	<input type="submit" value="更新" class="tourokubotan">
+	</form>
 
-	<a href="alluser.jsp" class="modoru">戻る</a>
+	<a href="UserListServlet" class="modoru">戻る</a>
 
 </body>
 </html>

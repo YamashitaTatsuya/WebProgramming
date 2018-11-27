@@ -16,6 +16,10 @@ public class User {
 	private String createDate;
 	private String updateDate;
 
+	public User() {
+
+	}
+
 	// ログインセッションを保存するためのコンストラクタ
 	public User(String loginId, String name) {
 		this.loginId = loginId;
@@ -33,6 +37,35 @@ public class User {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
+
+
+	//自分で足したコード
+
+	//詳細画面で使うコンストラクタ
+	public User(String loginId, String name, Date birthDate, String createDate,String updateDate) {
+		this.loginId = loginId;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
+	//更新画面で使うコンストラクタ
+	public User(String loginId,String name,Date birthDate) {
+		this.loginId = loginId;
+		this.name = name;
+		this.birthDate = birthDate;
+	}
+
+
+	//削除画面で使うコンストラクタ
+	public User(String loginId) {
+		this.loginId = loginId;
+	}
+
+	//ここまで
+
+
 	public int getId() {
 		return id;
 	}

@@ -12,19 +12,18 @@
 
 	<div class="header">
 	<p class="namename">ユーザー名さん</p>
-	<a href="#" class="logout">ログアウト</a>
+	<a href="LogoutServlet" class="logout">ログアウト</a>
 	</div>
 
-
-		<h1 class="hello">ユーザー削除確認</h1>
+	<h1 class="hello">ユーザー削除確認</h1>
 
 	<div class="sakujyo">
-	<p>ログインID:id0001</p>
+	<p>ログインID:${deluser.loginId}</p>
 	<p>を本当に削除してよろしいでしょうか？</p>
 	</div>
 
 
-	<input type="submit" value="キャンセル" class="kyanseru">
+	<input type="submit" value="キャンセル" class="kyanseru" onclick="location.href='UserListServlet'">
 	<input type="submit" value="OK" class="ok">
 
 

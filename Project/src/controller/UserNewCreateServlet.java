@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserUpdateServelet
+ * Servlet implementation class UserNewCreateServlet
  */
-@WebServlet("/UserUpdateServelet")
-public class UserUpdateServelet extends HttpServlet {
+@WebServlet("/UserNewCreateServlet")
+public class UserNewCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserUpdateServelet() {
+    public UserNewCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,27 +28,31 @@ public class UserUpdateServelet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		/*自分で足したコード*/
-
-		// URLからGETパラメータとしてIDを受け取る
-		String id = request.getParameter("id");
-
-		// 確認用：idをコンソールに出力
-		System.out.println(id);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/kousin.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
 		dispatcher.forward(request, response);
+
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		//自分で足したコード//
+
+
+		if(loginId = null) {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
+		dispatcher.forward(request, response);
+
+		}
+
+		response.sendRedirect("UserListServlet");
+		//ここまで//
+
 	}
 
 }

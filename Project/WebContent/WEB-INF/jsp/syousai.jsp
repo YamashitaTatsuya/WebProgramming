@@ -13,7 +13,7 @@
 
 <div class="header">
 <p class="namename">ユーザー名さん</p>
-<a href="#" class="logout">ログアウト</a>
+<a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 
 
@@ -22,33 +22,33 @@
 
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<p class="id">${User.id}</p>
+	<p class="id">${syouser.loginId}</p>
 	</div>
 
 	<div class="username">
 	<p class="user">ユーザー名</p>
-	<p class="namae">田中太郎</p>
+	<p class="namae">${syouser.name}</p>
 	</div>
 
 
 	<div class="seinengappi">
 	<p class="seinen">生年月日</p>
-	<p class="seg">1989年4月26日</p>
+	<p class="seg">${syouser.birthDate}</p>
 	</div>
 
 	<div class="tourokunitiji">
 	<p class="touroku">登録日時</p>
-	<p class="trn">2017年1月1日10:50</p>
+	<p class="trn">${syouser.createDate}</p>
 	</div>
 
 
 	<div class="kousinnitiji">
 	<p class="kousin">更新日時</p>
-	<p class="ksn">2017年2月1日01:05</p>
+	<p class="ksn">${syouser.updateDate}</p>
 	</div>
 
 
-	<a href="alluser.jsp" class="modoru">戻る</a>
+	<a href="UserListServlet" class="modoru">戻る</a>
 
 </body>
 </html>

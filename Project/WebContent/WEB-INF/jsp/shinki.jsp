@@ -14,7 +14,7 @@
 
 <div class="header">
 <p class="namename">ユーザー名さん</p>
-<a href="#" class="logout">ログアウト</a>
+<a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 
 
@@ -23,33 +23,34 @@
 
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<input type="text" name="名前" class="botan1">
+	<input type="text" name="newloginId" class="botan1">
 	</div>
 
 	<div class="passwordid">
 	<p class="password">パスワード</p>
-	<input type="text" name="名前" class="botan2">
+	<input type="text" name="newpassword" class="botan2">
 	</div>
 
 	<div class="passwordid2">
 	<p class="password2">パスワード（確認）</p>
-	<input type="text" name="名前" class="botan3">
+	<input type="text" name="newpassword2" class="botan3">
 	</div>
 
 	<div class="username">
 	<p class="user">ユーザー名</p>
-	<input type="text" name="名前" class="botan4">
+	<input type="text" name="newusername" class="botan4">
 	</div>
 
 	<div class="seinengappi">
 	<p class="seinen">生年月日</p>
-	<input type="text" name="名前" class="botan5">
+	<input type="text" name="newbirthdate" class="botan5">
 	</div>
 
-
+	<form class="form-signin" action="UserNewCreateServlet" method="post">
 	<input type="submit" value="登録" class="tourokubotan">
+	</form>
 
-	<a href="#" class="modoru">戻る</a>
+	<a href="UserListServlet" class="modoru">戻る</a>
 
 </body>
 </html>
