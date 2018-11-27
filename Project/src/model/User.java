@@ -41,6 +41,16 @@ public class User {
 
 	//自分で足したコード
 
+	//新規登録画面で使うコンストラクタ
+	public User(String loginId,String password, String name, Date birthDate) {
+		this.loginId = loginId;
+		this.password = password;
+		this.name = name;
+		this.birthDate = birthDate;
+
+	}
+
+
 	//詳細画面で使うコンストラクタ
 	public User(String loginId, String name, Date birthDate, String createDate,String updateDate) {
 		this.loginId = loginId;
