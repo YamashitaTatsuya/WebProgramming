@@ -24,7 +24,10 @@
 
 
 	<input type="submit" value="キャンセル" class="kyanseru" onclick="location.href='UserListServlet'">
+
+	<form class="form-signin" action="UserDeleteServlet" method="post">
 	<input type="submit" value="OK" class="ok">
+	</form>
 
 
 </body>

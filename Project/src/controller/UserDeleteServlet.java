@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,16 +58,31 @@ public class UserDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 
 		//自分で足したコード//
 
-		// ログイン時に保存したセッション内のユーザ情報を削除
-				session.removeAttribute("userInfo");
+		// URLからGETパラメータとしてIDを受け取る
+		String loginId = request.getParameter("loginId");
 
-				// ログインのサーブレットにリダイレクト
-				response.sendRedirect("LoginServlet");
+		// 確認用：idをコンソールに出力
+		System.out.println(loginId);
+
+		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
+
+
+		UserDao userDao = new UserDao();
+
+		try {
+			userDao.DelInfo(loginId);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+
+		// ユーザーリストのサーブレットにリダイレクト
+		response.sendRedirect("UserListServlet");
 
 		//ここまで//
 	}

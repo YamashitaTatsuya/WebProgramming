@@ -284,15 +284,16 @@ public void UpDateInfo(String loginId,String password,String password2,String na
         conn = DBManager.getConnection();
 
         // INSERT文を準備
-        String sql = "UPDATE user(password,name,birth_date,create_date,update_date)VALUES(?,?,?,now(),now())";
+        String sql = "UPDATE user SET password=?, name=?, birth_date=?, update_date=now() where login_id = ?";
 
          // INSERTを実行し、結果表を取得
         PreparedStatement pStmt = conn.prepareStatement(sql);
 
-        pStmt.setString(1, loginId);
-        pStmt.setString(2, password);
-        pStmt.setString(3, name);
-        pStmt.setString(4, birthDate);
+        pStmt.setString(1, password);
+        pStmt.setString(2, name);
+        pStmt.setString(3, birthDate);
+        pStmt.setString(4, loginId);
+
 
         int rs = pStmt.executeUpdate();
 
@@ -316,7 +317,9 @@ public void UpDateInfo(String loginId,String password,String password2,String na
 
 
 
-//削除画面のコード//
+//////////削除画面のコード////////////
+
+//削除画面で表示するコード//
 /**
 * ログインIDに紐づくユーザ情報を返す
 * @param loginId
@@ -358,6 +361,42 @@ try {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+}
+}
+
+//削除画面でデータベースから削除するコード//
+
+public void DelInfo(String loginId) throws SQLException {
+Connection conn = null;
+try {
+    // データベースへ接続
+    conn = DBManager.getConnection();
+
+    // SELECT文を準備
+    String sql = "DELETE FROM user WHERE login_id = ?";
+
+     // SELECTを実行し、結果表を取得
+    PreparedStatement pStmt = conn.prepareStatement(sql);
+    pStmt.setString(1, loginId);
+
+    int rs = pStmt.executeUpdate();
+
+
+} catch (SQLException e) {
+    e.printStackTrace();
+
+    throw e;
+
+} finally {
+    // データベース切断
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
         }
     }
 }
