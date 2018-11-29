@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,28 +52,75 @@ public class UserNewCreateServlet extends HttpServlet {
 		// リクエストパラメータの入力項目を取得
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
 		String name = request.getParameter("name");
 		String birthDate = request.getParameter("birthDate");
 
-		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
-		UserDao userDao = new UserDao();
-		userDao.NewInfo(loginId, password,name,birthDate);
 
 
-		// ユーザ一覧のサーブレットにリダイレクト
-		response.sendRedirect("UserListServlet");
+
 
 		/** 新規登録が失敗した場合 **/
-		if (loginId == null || password == null || name == null || birthDate == null) {
-			// リクエストスコープにエラーメッセージをセット
-			request.setAttribute("errMsg", "入力された内容は正しくありません");
+
+
+
+
+		//入力項目に一つでも未入力のものがある場合//
+		if (loginId.isEmpty() || password.isEmpty() || password2.isEmpty() ||name.isEmpty() || birthDate.isEmpty()) {
+			// リクエストスコープにエラーメッセージをセット//
+			request.setAttribute("errMsg", "入力された内容は正しくありません。未入力の項目があります。");
+			request.setAttribute("loginId",loginId);
+			request.setAttribute("name",name);
+			request.setAttribute("birthDate",birthDate);
 
 			// ログインjspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
 			dispatcher.forward(request, response);
 
+			return;
 		}
 
+
+		//パスワードとパスワード確認の入力内容が異なる場合//
+		if(!password.equals(password2)) {
+			// リクエストスコープにエラーメッセージをセット
+			request.setAttribute("errMsg", "入力された内容は正しくありません。確認パスワードが異なります。");
+			request.setAttribute("loginId",loginId);
+			request.setAttribute("name",name);
+			request.setAttribute("birthDate",birthDate);
+
+			// ログインjspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+		}
+
+
+		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
+		UserDao userDao = new UserDao();
+		try {
+			userDao.NewInfo(loginId, password,password2,name,birthDate);
+		} catch (SQLException e) {
+
+			//すでに登録されているログインIDが入力された場合//
+
+			// リクエストスコープにエラーメッセージをセット
+			request.setAttribute("errMsg", "入力された内容は正しくありません。入力したログインIDはすでに登録済みです。");
+			request.setAttribute("name",name);
+			request.setAttribute("birthDate",birthDate);
+
+			// ログインjspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shinki.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+
+		}
+
+
+		// ユーザ一覧のサーブレットにリダイレクト
+		response.sendRedirect("UserListServlet");
 
 
 		//ここまで//

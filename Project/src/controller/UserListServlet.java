@@ -40,6 +40,7 @@ public class UserListServlet extends HttpServlet {
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", userList);
 
+
 		// ユーザ一覧のjspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alluser.jsp");
 		dispatcher.forward(request, response);

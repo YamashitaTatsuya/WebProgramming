@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Common;
 import dao.UserDao;
 import model.User;
 
@@ -61,11 +63,79 @@ public class UserUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+
 		//自分で足したコード//
 
+        // リクエストパラメータの文字コードを指定
+        request.setCharacterEncoding("UTF-8");
+
+		// リクエストパラメータの入力項目を取得
+        String loginId = request.getParameter("loginId");
+		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
+		String name = request.getParameter("name");
+		String birthDate = request.getParameter("birthDate");
+
+
+
+		//パスワードとパスワード確認の入力内容が異なる場合//
+		if(!password.equals(password2)) {
+			// リクエストスコープにエラーメッセージをセット
+			request.setAttribute("errMsg", "入力された内容は正しくありません。確認パスワードが異なります。");
+			User user = new User();
+			user.setLoginId(loginId);
+			user.setName(name);
+			user.setBirthDate(Common.formatDate(birthDate));
+
+
+			request.setAttribute("kouuser", user);
+			// ログインjspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/kousin.jsp");
+			dispatcher.forward(request, response);
+
+					return;
+			}
+
+
+
+		//入力項目に一つでも未入力のものがある場合//
+		if (name.isEmpty() || birthDate.isEmpty()) {
+			// リクエストスコープにエラーメッセージをセット//
+			request.setAttribute("errMsg", "入力された内容は正しくありません。未入力の項目があります。");
+
+
+			User user = new User();
+			user.setLoginId(loginId);
+			user.setName(name);
+			user.setBirthDate(Common.formatDate(birthDate));
+
+
+			request.setAttribute("kouuser", user);
+
+
+			// ログインjspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/kousin.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+		}
+
+
+		UserDao userDao = new UserDao();
+		try {
+			userDao.UpDateInfo(loginId,password,password2,name,birthDate);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+
+		// ユーザ一覧のサーブレットにリダイレクト
+		response.sendRedirect("UserListServlet");
+	}
 
 		//ここまで//
 
-	}
+
 
 }

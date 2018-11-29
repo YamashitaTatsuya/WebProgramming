@@ -34,8 +34,8 @@
 	<div class="seinengappi">
 	<p class="seinen">生年月日</p>
 	<div class="seinyu">
-	<input type="text" name="" class="botan3" placeholder="年/月/日">～
-	<input type="text" name="" class="botan4" placeholder="年/月/日">
+	<input type="date" name="" class="botan3" >～
+	<input type="date" name="" class="botan4" >
 	</div>
 	</div>
 

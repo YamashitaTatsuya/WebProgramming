@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.danger{
+	color:red;
+}
 
 .header{
 	height:50px;

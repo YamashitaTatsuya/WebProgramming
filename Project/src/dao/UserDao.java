@@ -129,8 +129,9 @@ public class UserDao {
      * ログインIDに紐づくユーザ情報を返す
      * @param loginId
      * @return
+     * @throws SQLException
      */
-    public void NewInfo(String loginId,String password,String name,String birthDate) {
+    public void NewInfo(String loginId,String password,String password2,String name,String birthDate) throws SQLException {
         Connection conn = null;
         try {
             // データベースへ接続
@@ -151,6 +152,7 @@ public class UserDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
 
         } finally {
             // データベース切断
@@ -218,12 +220,14 @@ public User findByInfo(String id) {
 
 
 
-//更新画面のコード//
+//////////更新画面のコード////////////
 /**
 * ログインIDに紐づくユーザ情報を返す
 * @param loginId
 * @return
 */
+
+//更新画面でのデータベースから情報を取得する場合//
 public User findByUpInfo(String id) {
   Connection conn = null;
   try {
@@ -266,6 +270,49 @@ public User findByUpInfo(String id) {
   }
 }
 
+//更新画面でのデータベースへ情報を登録する場合//
+/**
+ * ログインIDに紐づくユーザ情報を返す
+ * @param loginId
+ * @return
+ * @throws SQLException
+ */
+public void UpDateInfo(String loginId,String password,String password2,String name,String birthDate) throws SQLException {
+    Connection conn = null;
+    try {
+        // データベースへ接続
+        conn = DBManager.getConnection();
+
+        // INSERT文を準備
+        String sql = "UPDATE user(password,name,birth_date,create_date,update_date)VALUES(?,?,?,now(),now())";
+
+         // INSERTを実行し、結果表を取得
+        PreparedStatement pStmt = conn.prepareStatement(sql);
+
+        pStmt.setString(1, loginId);
+        pStmt.setString(2, password);
+        pStmt.setString(3, name);
+        pStmt.setString(4, birthDate);
+
+        int rs = pStmt.executeUpdate();
+
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw e;
+
+    } finally {
+        // データベース切断
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
+}
 
 
 
