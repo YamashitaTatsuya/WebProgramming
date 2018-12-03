@@ -11,7 +11,7 @@
 <body>
 
 	<div class="header">
-	<p class="namename">ユーザー名さん</p>
+	<p class="namename">${userInfo.name}さん</p>
 	<a href="LogoutServlet" class="logout">ログアウト</a>
 	</div>
 
@@ -25,8 +25,10 @@
 
 	<input type="submit" value="キャンセル" class="kyanseru" onclick="location.href='UserListServlet'">
 
+
 	<form class="form-signin" action="UserDeleteServlet" method="post">
-	<input type="submit" value="OK" class="ok">
+	<input type="hidden" name="loginId" value="${deluser.loginId}">
+	<input type="submit" value="OK"  name="loginId">
 	</form>
 
 

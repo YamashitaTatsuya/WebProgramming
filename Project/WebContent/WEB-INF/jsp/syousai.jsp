@@ -12,7 +12,7 @@
 
 
 <div class="header">
-<p class="namename">ユーザー名さん</p>
+<p class="namename">${userInfo.name}さん</p>
 <a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 

@@ -123,7 +123,14 @@ public class UserUpdateServlet extends HttpServlet {
 
 		UserDao userDao = new UserDao();
 		try {
-			userDao.UpDateInfo(loginId,password,password2,name,birthDate);
+
+
+			if(password.isEmpty() && password2.isEmpty()) {
+				userDao.UpDateInfo2(loginId,name,birthDate);
+			}else {
+				userDao.UpDateInfo(loginId,password,password2,name,birthDate);
+			}
+
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

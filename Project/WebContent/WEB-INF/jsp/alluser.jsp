@@ -11,7 +11,11 @@
 <body>
 
 <div class="header">
-<p class="namename">${user.name}さん</p>
+
+<p class="namename">${userInfo.name}さん</p>
+<input type="hidden" name="name" value="${kanriname.name}">
+
+
 <a href="LogoutServlet" class="logout">ログアウト</a>
 </div>
 

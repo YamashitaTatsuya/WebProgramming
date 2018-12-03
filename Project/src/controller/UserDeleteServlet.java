@@ -65,7 +65,7 @@ public class UserDeleteServlet extends HttpServlet {
 		// URLからGETパラメータとしてIDを受け取る
 		String loginId = request.getParameter("loginId");
 
-		// 確認用：idをコンソールに出力
+		// 確認用：loginidをコンソールに出力
 		System.out.println(loginId);
 
 		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行

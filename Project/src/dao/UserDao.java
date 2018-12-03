@@ -1,5 +1,9 @@
 package dao;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -8,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import model.User;
 
@@ -80,7 +86,7 @@ public class UserDao {
 
             // SELECT文を準備
             // TODO: 未実装：管理者以外を取得するようSQLを変更する
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user where login_id != 'admin'";
 
              // SELECTを実行し、結果表を取得
             Statement stmt = conn.createStatement();
@@ -118,10 +124,9 @@ public class UserDao {
     }
 
 
-
-
-
 //自分で足したコード//
+
+
 
 //新規登録画面のコード//
 
@@ -140,21 +145,40 @@ public class UserDao {
             // INSERT文を準備
             String sql = "INSERT INTO user(login_id,password,name,birth_date,create_date,update_date)VALUES(?,?,?,?,now(),now())";
 
+
+          //ハッシュを生成したい元の文字列
+            String source = password;
+            //ハッシュ生成前にバイト配列に置き換える際のCharset
+            Charset charset = StandardCharsets.UTF_8;
+            //ハッシュアルゴリズム
+            String algorithm = "MD5";
+
+            //ハッシュ生成処理
+            byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+            String result = DatatypeConverter.printHexBinary(bytes);
+            //標準出力
+            System.out.println(result);
+
+
+
+
              // INSERTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, loginId);
-            pStmt.setString(2, password);
+            pStmt.setString(2, result);
             pStmt.setString(3, name);
             pStmt.setString(4, birthDate);
 
-            int rs = pStmt.executeUpdate();
+            pStmt.executeUpdate();
 
 
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
 
-        } finally {
+        } catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} finally {
             // データベース切断
             if (conn != null) {
                 try {
@@ -289,13 +313,76 @@ public void UpDateInfo(String loginId,String password,String password2,String na
          // INSERTを実行し、結果表を取得
         PreparedStatement pStmt = conn.prepareStatement(sql);
 
-        pStmt.setString(1, password);
+
+        //ハッシュを生成したい元の文字列
+        String source = password;
+        //ハッシュ生成前にバイト配列に置き換える際のCharset
+        Charset charset = StandardCharsets.UTF_8;
+        //ハッシュアルゴリズム
+        String algorithm = "MD5";
+
+        //ハッシュ生成処理
+        byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+        String result = DatatypeConverter.printHexBinary(bytes);
+        //標準出力
+        System.out.println(result);
+
+        pStmt.setString(1, result);
         pStmt.setString(2, name);
         pStmt.setString(3, birthDate);
         pStmt.setString(4, loginId);
 
 
-        int rs = pStmt.executeUpdate();
+        pStmt.executeUpdate();
+
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw e;
+
+    } catch (NoSuchAlgorithmException e) {
+
+		e.printStackTrace();
+	} finally {
+        // データベース切断
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
+}
+
+//更新画面でのデータベースへ情報を登録する場合(パスワードなし）//
+
+/**
+ * ログインIDに紐づくユーザ情報を返す
+ * @param loginId
+ * @return
+ * @throws SQLException
+ */
+public void UpDateInfo2(String loginId,String name,String birthDate) throws SQLException {
+    Connection conn = null;
+    try {
+        // データベースへ接続
+        conn = DBManager.getConnection();
+
+        // INSERT文を準備
+        String sql = "UPDATE user SET name=?, birth_date=?, update_date=now() where login_id = ?";
+
+         // INSERTを実行し、結果表を取得
+        PreparedStatement pStmt = conn.prepareStatement(sql);
+
+
+        pStmt.setString(1, name);
+        pStmt.setString(2, birthDate);
+        pStmt.setString(3, loginId);
+
+
+        pStmt.executeUpdate();
 
 
     } catch (SQLException e) {
@@ -314,7 +401,6 @@ public void UpDateInfo(String loginId,String password,String password2,String na
         }
     }
 }
-
 
 
 //////////削除画面のコード////////////
@@ -366,6 +452,8 @@ try {
 }
 }
 
+
+
 //削除画面でデータベースから削除するコード//
 
 public void DelInfo(String loginId) throws SQLException {
@@ -381,7 +469,7 @@ try {
     PreparedStatement pStmt = conn.prepareStatement(sql);
     pStmt.setString(1, loginId);
 
-    int rs = pStmt.executeUpdate();
+    pStmt.executeUpdate();
 
 
 } catch (SQLException e) {
