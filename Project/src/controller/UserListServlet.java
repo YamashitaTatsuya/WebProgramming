@@ -69,10 +69,19 @@ public class UserListServlet extends HttpServlet {
 		//検索ボタンを押した時の処理を記入
 
 
+		// リクエストパラメータの入力項目を取得
+        String searchloginId = request.getParameter("searchLoginId");
+
+		String searchName = request.getParameter("searchName");
+		String searchBirthDate1 = request.getParameter("searchBirthDate1");
+		String searchBirthDate2 = request.getParameter("searchBirthDate2");
+
+
 
 		// ユーザ一覧情報を取得
 				UserDao userDao = new UserDao();
-				List<User> userList = userDao.findSearch();
+
+				List<User> userList = userDao.findSearch(searchloginId,searchName,searchBirthDate1,searchBirthDate2);
 
 
 				// リクエストスコープにユーザ一覧情報をセット

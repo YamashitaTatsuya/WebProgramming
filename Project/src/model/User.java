@@ -42,6 +42,8 @@ public class User {
 	//自分で足したコード
 
 
+
+
 	//新規登録画面で使うコンストラクタ
 	public User(String loginId,String password, String name, Date birthDate) {
 		this.loginId = loginId;
@@ -61,6 +63,7 @@ public class User {
 	}
 
 	//更新画面で使うコンストラクタ
+	//検索機能で使うコンストラクタ
 	public User(String loginId,String name,Date birthDate) {
 		this.loginId = loginId;
 		this.name = name;

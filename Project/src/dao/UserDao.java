@@ -133,7 +133,7 @@ public class UserDao {
      * 検索したユーザ情報を取得する
      * @return
      */
-    public List<User> findSearch(String searchloginId, String searchname, Date searchbirthDate) {
+    public List<User> findSearch(String searchloginId, String searchName, String searchBirthDate1, String searchBirthDate2) {
         Connection conn = null;
         List<User> userList = new ArrayList<User>();
 
@@ -144,26 +144,31 @@ public class UserDao {
             // SELECT文を準備//
 
             // TODO: 未実装：検索結果を取得するようSQLを変更する
-            String sql = "SELECT * FROM user WHERE login_id = ? AND name LIKE %?% AND birth_date >= ? AND birth_date < ? ";
+            String sql = "SELECT * FROM user WHERE login_id != 'admin' ";
 
 
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, searchloginId);
-            pStmt.setString(2, searchname);
-            pStmt.setDate(3, searchbirthDate);
-            ResultSet rs = pStmt.executeQuery();
+            //? AND name LIKE %?% AND birth_date >= ? AND birth_date < ?//
 
-            if(!loginId.isEnpty) {
-            	sql += "AND login_id=''";
+            if(!searchloginId.isEmpty()) {
+            	sql += "AND login_id='" + searchloginId + "' ";
             }
 
-            if() {
+            if(!searchName.isEmpty()) {
+            	sql += "AND name LIKE % " + searchName + "%";
+            }
 
+            if(!(searchBirthDate1.isEmpty())) {
+            	sql += "AND birth_date >= " + searchBirthDate1;
+            }
+
+            if(!(searchBirthDate2.isEmpty())) {
+            	sql += "AND birth_date < " + searchBirthDate2;
             }
 
              // SELECTを実行し、結果表を取得
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+
 
 
             // 結果表に格納されたレコードの内容を
