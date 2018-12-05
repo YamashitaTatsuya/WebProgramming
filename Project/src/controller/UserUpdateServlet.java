@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.Common;
 import dao.UserDao;
@@ -33,6 +34,19 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// TODO 未実装：ログインセッションがない場合、ログイン画面にリダイレクトさせる
+		// セッションスコープからインスタンスを取得
+
+		//HttpSessionインスタンスの取得//
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("userInfo") == null) {
+		// ユーザ一覧のサーブレットにリダイレクト
+				response.sendRedirect("LoginServlet");
+				return;
+
+		}
 
 		/*自分で足したコード*/
 		request.setCharacterEncoding("UTF-8");

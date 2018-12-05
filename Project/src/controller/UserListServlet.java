@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
@@ -31,7 +32,21 @@ public class UserListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
 		// TODO 未実装：ログインセッションがない場合、ログイン画面にリダイレクトさせる
+		// セッションスコープからインスタンスを取得
+
+		//HttpSessionインスタンスの取得//
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("userInfo") == null) {
+		// ユーザ一覧のサーブレットにリダイレクト
+				response.sendRedirect("LoginServlet");
+				return;
+
+		}
+
 
 		// ユーザ一覧情報を取得
 		UserDao userDao = new UserDao();
@@ -40,14 +55,6 @@ public class UserListServlet extends HttpServlet {
 
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", userList);
-
-
-
-
-
-
-
-
 
 		// ユーザ一覧のjspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alluser.jsp");
@@ -59,6 +66,30 @@ public class UserListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO  未実装：検索処理全般
+		//検索ボタンを押した時の処理を記入
+
+
+
+		// ユーザ一覧情報を取得
+				UserDao userDao = new UserDao();
+				List<User> userList = userDao.findSearch();
+
+
+				// リクエストスコープにユーザ一覧情報をセット
+				request.setAttribute("userList", userList);
+
+
+				// ユーザ一覧のjspにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alluser.jsp");
+				dispatcher.forward(request, response);
+
+
+
+
+
+
+
+
 	}
 
 }

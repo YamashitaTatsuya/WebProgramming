@@ -21,29 +21,36 @@
 
 <h1 class="hello">ユーザ一覧</h1>
 
-
+	<c:if test="${userInfo.loginId == 'admin'}">
 	<a href="UserNewCreateServlet">新規登録</a>
+	</c:if>
+
 
 
 	<div class="loginid">
 	<p class="login">ログインID</p>
-	<input type="text" name="名前" class="botan1">
+	<input type="text" name="searchLoginId" class="botan1">
 	</div>
 
 	<div class="passwordid">
-	<p class="password">パスワード</p>
-	<input type="text" name="名前" class="botan2">
+	<p class="password">ユーザ名</p>
+	<input type="text" name="searchName" class="botan2">
 	</div>
 
 	<div class="seinengappi">
 	<p class="seinen">生年月日</p>
 	<div class="seinyu">
-	<input type="date" name="" class="botan3" >～
-	<input type="date" name="" class="botan4" >
+	<input type="date" name="searchBirthDate1" class="botan3" >～
+	<input type="date" name="searchBirthDate2" class="botan4" >
 	</div>
 	</div>
 
+
+
+	<form class="form-signin" action="UserListServlet" method="post">
 	<input type="submit" value="検索" class="kensaku">
+	</form>
+
 
 	<hr>
 
@@ -66,10 +73,24 @@
                      <td>${user.name}</td>
                      <td>${user.birthDate}</td>
                      <!-- TODO 未実装；ログインボタンの表示制御を行う -->
+
+
                      <td>
                        <a class="syou" href="UserDetailServlet?id=${user.id}">詳細</a>
+
+						<c:if test="${userInfo.loginId == 'admin' }">
                        <a class="kouu" href="UserUpdateServlet?id=${user.id}">更新</a>
+                       </c:if>
+
+                       <c:if test="${userInfo.loginId == user.loginId }">
+                       <a class="kouu" href="UserUpdateServlet?id=${user.id}">更新</a>
+                       </c:if>
+
+                       <c:if test="${userInfo.loginId == 'admin'}">
                        <a class="saku" href="UserDeleteServlet?id=${user.id}">削除</a>
+                       </c:if>
+
+
                      </td>
                    </tr>
                  </c:forEach>
