@@ -23,6 +23,7 @@ public class UserNewCreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+
     public UserNewCreateServlet() {
         super();
         // TODO Auto-generated constructor stub

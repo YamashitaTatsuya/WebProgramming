@@ -51,9 +51,9 @@ public class UserDetailServlet extends HttpServlet {
 		// URLからGETパラメータとしてIDを受け取る
 		String id = request.getParameter("id");
 
+
 		// 確認用：idをコンソールに出力
 		System.out.println(id);
-
 
 		// TODO  未実装：idを引数にして、idに紐づくユーザ情報を出力する
 

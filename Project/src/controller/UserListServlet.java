@@ -36,8 +36,9 @@ public class UserListServlet extends HttpServlet {
 
 		// TODO 未実装：ログインセッションがない場合、ログイン画面にリダイレクトさせる
 		// セッションスコープからインスタンスを取得
-
 		//HttpSessionインスタンスの取得//
+
+
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("userInfo") == null) {
@@ -61,17 +62,18 @@ public class UserListServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO  未実装：検索処理全般
 		//検索ボタンを押した時の処理を記入
-
+        // リクエストパラメータの文字コードを指定
+        request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
         String searchloginId = request.getParameter("searchLoginId");
-
 		String searchName = request.getParameter("searchName");
 		String searchBirthDate1 = request.getParameter("searchBirthDate1");
 		String searchBirthDate2 = request.getParameter("searchBirthDate2");
@@ -91,12 +93,6 @@ public class UserListServlet extends HttpServlet {
 				// ユーザ一覧のjspにフォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alluser.jsp");
 				dispatcher.forward(request, response);
-
-
-
-
-
-
 
 
 	}

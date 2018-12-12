@@ -78,7 +78,7 @@ public class UserDeleteServlet extends HttpServlet {
 		//自分で足したコード//
 
 		// URLからGETパラメータとしてIDを受け取る
-		String loginId = request.getParameter("loginId");
+		String loginId = request.getParameter("delId");
 
 		// 確認用：loginidをコンソールに出力
 		System.out.println(loginId);

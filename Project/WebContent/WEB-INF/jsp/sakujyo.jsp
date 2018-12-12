@@ -27,8 +27,8 @@
 
 
 	<form class="form-signin" action="UserDeleteServlet" method="post">
-	<input type="hidden" name="loginId" value="${deluser.loginId}">
-	<input type="submit" value="OK"  name="loginId">
+	<input type="hidden" name="delId" value="${deluser.loginId}">
+	<input type="submit" value="OK" >
 	</form>
 
 

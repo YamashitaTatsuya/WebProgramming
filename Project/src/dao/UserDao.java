@@ -147,23 +147,24 @@ public class UserDao {
             String sql = "SELECT * FROM user WHERE login_id != 'admin' ";
 
 
-            //? AND name LIKE %?% AND birth_date >= ? AND birth_date < ?//
 
             if(!searchloginId.isEmpty()) {
             	sql += "AND login_id='" + searchloginId + "' ";
             }
 
             if(!searchName.isEmpty()) {
-            	sql += "AND name LIKE % " + searchName + "%";
+            	sql += "AND name LIKE '%" + searchName + "%' ";
             }
 
             if(!(searchBirthDate1.isEmpty())) {
-            	sql += "AND birth_date >= " + searchBirthDate1;
+            	sql += "AND birth_date >= '" + searchBirthDate1 +"' ";
             }
 
             if(!(searchBirthDate2.isEmpty())) {
-            	sql += "AND birth_date < " + searchBirthDate2;
+            	sql += "AND birth_date < '" + searchBirthDate2 + "'";
             }
+
+            System.out.println(sql);
 
              // SELECTを実行し、結果表を取得
             Statement stmt = conn.createStatement();
@@ -225,7 +226,8 @@ public class UserDao {
             String sql = "INSERT INTO user(login_id,password,name,birth_date,create_date,update_date)VALUES(?,?,?,?,now(),now())";
 
 
-          //ハッシュを生成したい元の文字列
+            //暗号化のコード
+            //ハッシュを生成したい元の文字列
             String source = password;
             //ハッシュ生成前にバイト配列に置き換える際のCharset
             Charset charset = StandardCharsets.UTF_8;

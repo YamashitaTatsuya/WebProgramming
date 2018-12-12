@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 
-
+		//暗号化の手順
         //ハッシュを生成したい元の文字列
         String source = password;
         //ハッシュ生成前にバイト配列に置き換える際のCharset
@@ -93,7 +93,7 @@ public class LoginServlet extends HttpServlet {
         String result = DatatypeConverter.printHexBinary(bytes);
         //標準出力
         System.out.println(result);
-
+        //暗号化ここまで
 
 
 

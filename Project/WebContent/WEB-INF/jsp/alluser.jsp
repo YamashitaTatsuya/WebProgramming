@@ -26,7 +26,7 @@
 	</c:if>
 
 
-
+	<form class="form-signin" action="UserListServlet" method="post">
 	<div class="loginid">
 	<p class="login">ログインID</p>
 	<input type="text" name="searchLoginId" class="botan1">
@@ -47,7 +47,7 @@
 
 
 
-	<form class="form-signin" action="UserListServlet" method="post">
+
 	<input type="submit" value="検索" class="kensaku">
 	</form>
 
@@ -94,6 +94,11 @@
                      </td>
                    </tr>
                  </c:forEach>
+
+
+
+
+
                </tbody>
              </table>
            </div>
