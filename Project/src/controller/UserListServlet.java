@@ -45,7 +45,6 @@ public class UserListServlet extends HttpServlet {
 		// ユーザ一覧のサーブレットにリダイレクト
 				response.sendRedirect("LoginServlet");
 				return;
-
 		}
 
 
@@ -93,7 +92,6 @@ public class UserListServlet extends HttpServlet {
 				// ユーザ一覧のjspにフォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alluser.jsp");
 				dispatcher.forward(request, response);
-
 
 	}
 
